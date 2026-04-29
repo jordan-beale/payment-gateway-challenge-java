@@ -10,9 +10,8 @@ import org.springframework.web.client.RestTemplate;
 public class ApplicationConfiguration {
 
   @Bean
-  public RestTemplate restTemplate(RestTemplateBuilder builder) {
-    return builder
-        .setConnectTimeout(Duration.ofMillis(10000))
+  public RestTemplate restTemplate(final RestTemplateBuilder builder) {
+    return builder.setConnectTimeout(Duration.ofMillis(10000))
         .setReadTimeout(Duration.ofMillis(10000))
         .build();
   }

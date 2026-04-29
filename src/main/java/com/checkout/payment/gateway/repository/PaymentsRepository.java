@@ -1,22 +1,28 @@
 package com.checkout.payment.gateway.repository;
 
-import com.checkout.payment.gateway.model.PostPaymentResponse;
+import com.checkout.payment.gateway.model.Payment;
 import java.util.HashMap;
 import java.util.Optional;
-import java.util.UUID;
 import org.springframework.stereotype.Repository;
+
+import static java.util.Objects.requireNonNull;
 
 @Repository
 public class PaymentsRepository {
 
-  private final HashMap<UUID, PostPaymentResponse> payments = new HashMap<>();
-
-  public void add(PostPaymentResponse payment) {
-    payments.put(payment.getId(), payment);
+  public static PaymentsRepository of() {
+    return new PaymentsRepository();
   }
 
-  public Optional<PostPaymentResponse> get(UUID id) {
-    return Optional.ofNullable(payments.get(id));
+  private final HashMap<String, Payment> payments = new HashMap<>();
+
+  public void store(final Payment payment) {
+    requireNonNull(payment, "Payment required");
+    this.payments.put(payment.id(), payment);
   }
 
+  public Optional<Payment> paymentById(final String id) {
+    requireNonNull(id, "ID required");
+    return Optional.ofNullable(this.payments.get(id));
+  }
 }
