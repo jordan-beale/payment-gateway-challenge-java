@@ -158,21 +158,13 @@ class PaymentGatewayFunctionalTest {
 
   private static final PaymentRequest DECLINING_REQUEST =
       PaymentRequest.builder()
+          .usingPrototype(AUTHORIZING_REQUEST)
           .withCardNumber("2222405343248872")
-          .withExpiryMonth(4)
-          .withExpiryYear(2030)
-          .withCurrency("GBP")
-          .withAmount(100)
-          .withCvv("123")
           .build();
 
   private static final PaymentRequest BANK_UNAVAILABLE_REQUEST =
       PaymentRequest.builder()
+          .usingPrototype(AUTHORIZING_REQUEST)
           .withCardNumber("2222405343248870")
-          .withExpiryMonth(4)
-          .withExpiryYear(2030)
-          .withCurrency("GBP")
-          .withAmount(100)
-          .withCvv("123")
           .build();
 }
